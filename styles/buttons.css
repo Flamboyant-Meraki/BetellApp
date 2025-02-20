@@ -1,0 +1,185 @@
+.menu-button {
+    width: 40px;
+    height: 50px;
+    margin-right: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    will-change:auto;
+  }
+  .menu-button:hover {
+    animation: pulse 1s infinite;
+  }
+  .hideBasket{
+    position: fixed;
+    top: 80px;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5, 1.5);
+    }
+  }
+  .menu-icon {
+    width: 26px;
+    transition: 1s;
+  }
+
+  #arrowBtn{
+    align-self: center;
+    cursor: pointer;
+    width: 64px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    border-radius: 50px;
+    margin: 10px;
+    background: linear-gradient(180deg, #eeeeee, #ffffff, #eeeeee);
+    box-shadow: rgba(50, 50, 93, 0.158) 0px 50px 100px -20px, rgba(0, 0, 0, 0.192) 0px 30px 60px -30px, rgba(10, 37, 64, 0.226) 0px -2px 6px 0px inset;
+  }
+  #arrowBtn:hover{
+    background: linear-gradient(180deg, #eeeeee, #ffffff, #eeeeee);
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 3px 6px -12px inset, rgba(0, 0, 0, 0.3) 0px 3px 6px -3px inset;
+  }
+  .elementToRotate{
+    width: 32px;
+  }
+  .elementToRotate.rotate-180deg{
+    transform: rotate(180deg);
+  }
+
+
+  .dishTemplate button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 40px;
+    height: 40px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    border: none;
+    box-shadow: blueviolet 0px 0px 0px 2px;
+    background: linear-gradient(45deg, blueviolet, rgba(146, 30, 255, 0.233));
+    transition: 250ms;
+    cursor: pointer;
+  }
+  .dishTemplate button:hover {
+    background: linear-gradient(45deg, rgba(230, 19, 47, 0.651), rgba(247, 152, 10, 0.459));
+    box-shadow: rgba(219, 6, 6, 0.548) 0px 0px 0px 2px;
+  }
+  .dishTemplate .hoverIcon:hover{
+    animation: pulse 1s infinite;
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.5, 1.5);
+    }
+  }
+
+  .shoppingArticle button {
+    width: 27px;
+    cursor: pointer;
+    aspect-ratio: 1;
+    border: none;
+    transition: all 0.2s;
+    font-style: bold;
+    border-radius: 8px;
+    text-transform: uppercase;
+    text-decoration: none;
+    place-items: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+    border-radius: 5px;
+    background: none;
+    opacity: 65%;
+  }
+  .shoppingArticle button:hover {
+    transform: translateY(3px);
+    opacity: 100%;
+  }
+
+  #total button {
+    cursor: pointer;
+    width: 9em;
+    height: 3em;
+    align-self: center;
+    position: fixed;
+    bottom: 20px;
+    border-radius: 15px;
+    border: none;
+    background-color: rgb(120, 0, 150);
+    font-size: 17px;
+    font-weight: 600;
+    color: white;
+    box-shadow: inset 0 1px 0 0 rgb(120, 0, 150),
+      0 2px 0 0 rgb(95, 0, 119), 0 4px 0 0 rgb(95, 0, 119),
+      0 6px 0 0 rgb(95, 0, 119), 0 8px 0 0 rgb(95, 0, 119),
+      0 8px 16px 0 rgb(255, 255, 255);
+      transition: all 250ms;
+  }
+  #total button:hover {
+    transform: translateY(4px);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255,255,255,0.3),
+      0 1px 0 0 rgb(109 40 217),
+      0 2px 0 0 rgb(95, 0, 119),
+      0 3px 0 0 rgb(95, 0, 119),
+      0 4px 0 0 rgb(95, 0, 119),
+      0 4px 8px 0 rgb(255, 255, 255);
+  }
+  
+  .deleteBtn img {
+    width: 19px;
+  }
+  
+  #switch{
+    font-size: 30px;
+    margin-left: 20px;
+    margin-bottom: 6px;
+    appearance: none;
+    width: 60px;
+    height: 30px;
+    background-color: #ddd;
+    border-radius: 25px;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    transition: 0.2s all ease-in-out;
+  }
+  #switch:checked{
+    background-color: blueviolet;
+  }
+  #switch::after{
+    position: absolute;
+    content: "";
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background-color: #fff;
+    transform: scale(0.7);
+    left: 0;
+    transition: 0.2s all ease-in-out;
+  }
+  #switch:checked:after{
+    left: calc(100% - 30px);
+  }
+  .switchBox{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 4px;
+  }
+  #gettingStyle{
+    width: 150px;
+    height: 30px;
+    text-align: center;
+    border: none;
+    font-size: 18px;
+  }

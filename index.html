@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bestellapp</title>
+    <link
+      rel="shortcut icon"
+      href="./assets/img/DBLogoFav.png"
+      type="image/x-icon"
+    />
+
+    <!-- data -->
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/fontstyles.css" />
+    <link rel="stylesheet" href="styles/scrollbar.css" />
+    <link rel="stylesheet" href="styles/basket.css" />
+    <link rel="stylesheet" href="styles/query.css" />
+    <link rel="stylesheet" href="styles/buttons.css" />
+    <link rel="stylesheet" href="styles/navigation.css" />
+  </head>
+
+  <body>
+    <header>
+      <div class="headShow">
+        <img class="header_logo" src="./Material/Logo/Logo.png" alt="" />
+        <div class="evaluation">
+          <img class="stars" src="./assets/icons/stars.png" alt="Star">
+          <p>4/5</p>
+        </div>
+      </div>
+      <button onclick="toggleSidebar()" class="menu-button">
+        <img class="menu-icon" src="./assets/icons/menu.png" alt="" />
+      </button>
+    </header>
+
+    <nav>
+      <ul class="sidebar">
+        <li>
+          <a href="#contentbox"
+            ><img
+              class="menu-icon"
+              src="./assets/icons/home.png"
+              alt="House"
+              href="#contentbox"
+            />Home</a
+          >
+        </li>
+        <li>
+          <a onclick="toggleShoppingCart()"
+            ><img
+              class="menu-icon"
+              src="./assets/icons/shopping_bag.png"
+              alt="Shoppingbag"
+            />Warenkorb</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <div id="splitContent">
+      <section id="contentbox">
+        <div class="faceBurgerImg">
+          <label class="showName">DAILY BREAD</label>
+          <div class="brandIconBox">
+            <img
+              class="brandIcon"
+              src="./assets/img/DBLogoFav3.png"
+              alt="Brand"
+            />
+          </div>
+        </div>
+        <div class="navigation" id="navigation">
+          <h2>Kategorien</h2>
+          <div class="navigationLinkBox">
+            <img
+              class="arrowToRight"
+              src="./assets/icons/arrow_right.png"
+              alt="arrow_right"
+            />
+            <a href="#maindish" onclick="scrollToElement(event)">Brote</a>
+            <a href="#sidedish">Brötchen</a>
+            <a href="#sandwiches">Belegtes</a>
+            <a href="#drinks">Getränke</a>
+          </div>
+        </div>
+
+        <section id="maindish">
+          <h3 class="categoryHeadline" id="mainDishes">Brote:</h3>
+          <div class="dishBox" id="dishBox1">
+            <!-- maindish content -->
+          </div>
+          <div
+            id="arrowBtn"
+            data-target="dishBox1"
+            onclick="toggleDishBox('dishBox1', 'arrow1')"
+          >
+            <img
+              class="elementToRotate"
+              id="arrow1"
+              src="./assets/icons/slideopen.png"
+              alt=""
+            />
+          </div>
+        </section>
+
+        <section id="sidedish">
+          <h3 class="categoryHeadline" id="sideDishes">Brötchen:</h3>
+          <div class="dishBox" id="dishBox2">
+            <!-- sidedish content -->
+          </div>
+          <div
+            id="arrowBtn"
+            data-target="dishBox2"
+            onclick="toggleDishBox('dishBox2', 'arrow2')"
+          >
+            <img
+              class="elementToRotate"
+              id="arrow2"
+              src="./assets/icons/slideopen.png"
+              alt=""
+            />
+          </div>
+        </section>
+
+        <section id="sandwiches">
+          <h3 class="categoryHeadline" id="sandwich">Belegtes:</h3>
+          <div class="dishBox" id="dishBox3">
+            <!-- sandwich content -->
+          </div>
+          <div
+            id="arrowBtn"
+            data-target="dishBox3"
+            onclick="toggleDishBox('dishBox3', 'arrow3')"
+          >
+            <img
+              class="elementToRotate"
+              id="arrow3"
+              src="./assets/icons/slideopen.png"
+              alt=""
+            />
+          </div>
+        </section>
+
+        <section id="drinks">
+          <h3 class="categoryHeadline" id="toDrink">Getränke:</h3>
+          <div class="dishBox" id="dishBox4">
+            <!-- drink content -->
+          </div>
+          <div
+            id="arrowBtn"
+            data-target="dishBox4"
+            onclick="toggleDishBox('dishBox4', 'arrow4')"
+          >
+            <img
+              class="elementToRotate"
+              id="arrow4"
+              src="./assets/icons/slideopen.png"
+              alt=""
+            />
+          </div>
+        </section>
+
+        <!-- Hidden Form for OrderBtn -->
+        <form
+          id="orderForm"
+          action="https://api.web3forms.com/submit"
+          method="POST"
+          style="display: none"
+        >
+          <input
+            type="hidden"
+            name="access_key"
+            value="95dc0e31-20ab-4d57-a2c7-8adef8500639"
+          />
+          <input type="email" name="_replyto" id="customerEmail" />
+          <textarea name="message" id="orderMessage"></textarea>
+          <button type="submit">Submit</button>
+        </form>
+
+        <footer>
+          <p>Copyright © 2025 Nico Zinngrebe</p>
+        </footer>
+      </section>
+
+      <!-- Shopping-Cart -->
+      <section id="shopping-cart">
+        <div id="shoping-cartArticles">
+          <button class="menu-button hideBasket" onclick="toggleShoppingCart()">
+            <img class="menu-icon" src="./assets/icons/close.png" alt="Hide" />
+          </button>
+          <span>Warenkorb</span>
+          <div class="switchBox">
+            <input type="checkbox" id="switch" />
+            <input type="text" value="Abholung" id="gettingStyle" />
+          </div>
+          <hr />
+          <div id="articles">
+            <!-- Articles -->
+          </div>
+          <div id="total">
+            <p><input id="amount" type="text" value="0" />Artikel</p>
+            <p><input id="totalPrice" type="text" value="0" />€</p>
+            <button id="sendOrderBtn">Jetzt bestellen</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="./script.js"></script>
+    <script src="./scripts/template.js"></script>
+    <script src="./scripts/shopping-cart.js"></script>
+    <script src="./scripts/buttons.js"></script>
+    <script src="./scripts/backend.js"></script>
+  </body>
+</html>

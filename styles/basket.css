@@ -1,0 +1,92 @@
+#shoping-cartArticles {
+  position: sticky;
+  top: 102px;
+  overflow: hidden;
+}
+#shoping-cartArticles span {
+  font-size: 26px;
+  margin-bottom: 10px;
+  align-items: center;
+  flex-direction: column;
+  display: flex;
+  flex-grow: 1;
+}
+.shoppingArticle {
+  margin: 16px;
+}
+.shoppingArticle p {
+  display: flex;
+  justify-content: space-between;
+}
+.shoppingArticle input {
+  width: 26px;
+  text-align: center;
+  border: none;
+  cursor: context-menu;
+}
+.shoppingArticle h3 {
+  margin-block-end: 0;
+  margin-left: 6px;
+}
+.shoppingArticle label {
+  display: flex;
+  margin-bottom: 6px;
+  margin-top: 14px;
+}
+.shoppingArticle div {
+  margin: 6px 0;
+}
+
+
+.article-head {
+  display: flex;
+  align-items: center;
+}
+.article-head h3 {
+  display: flex;
+  flex-grow: 1;
+}
+.articleContent {
+  padding-left: 32px;
+}
+.articleContent button img {
+  width: 24px;
+  justify-self: center;
+  align-self: center;
+  padding-top: 4px;
+}
+.articleContent div {
+  display: flex;
+  align-items: center;
+}
+.turn180 {
+  transform: rotate(180deg);
+}
+
+#articles {
+  overflow-y: auto;
+  max-height: 55dvh;
+}
+#total {
+  cursor: context-menu;
+  margin: 10px 20px;
+  font-size: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  
+}
+#total p {
+  color: blueviolet;
+}
+#total input {
+  border: none;
+  cursor: context-menu;
+  width: 60px;
+  height: 20px;
+  text-align: center;
+  font-weight: bold;
+  color: blueviolet;
+  font-size: 19px;
+}
+
