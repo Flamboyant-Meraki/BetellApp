@@ -40,7 +40,6 @@ header {
 /* Content */
 #splitContent {
   display: flex;
-  width: 100%;
 }
 
 #contentbox {
@@ -58,21 +57,23 @@ header {
 #shopping-cart {
   width: 0;
   min-height: calc(100dvh - 80px);
-  transition: 0.5s;
+  transition: width 0.4s ease-in-out, opacity 0.3s ease-in-out, visibility 0.3s;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   overflow: auto;
   z-index: 30;
   position: relative;
+  opacity: 0;
 }
 #shopping-cart #shoping-cartArticles{
   display: none;
 }
 #shopping-cart.show {
   width: 340px;
-  transition: 0.5s;
+  transition: 0.4s;
   position: sticky;
   top: 80px;
   overflow: visible;
+  opacity: 100%;
 }
 #shopping-cart.show #shoping-cartArticles{
   display:inline;
@@ -181,5 +182,10 @@ footer{
 }
 footer p{
   margin-bottom: 12px;
+}
+
+.dishHead{
+  display: flex;
+  justify-content: center;
 }
 

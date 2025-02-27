@@ -20,13 +20,6 @@
     will-change: auto;
     min-height: 100dvh;
   }
-  .sidebar:hover {
-    width: 60px;
-  }
-  nav li:hover {
-    box-shadow: none;
-    margin-left: 0;
-  }
   ::-webkit-scrollbar {
     display: none;
   }

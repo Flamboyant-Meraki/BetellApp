@@ -1,128 +1,143 @@
 // Order button
-document.getElementById('sendOrderBtn').addEventListener('click', function() {
-    const articles = document.getElementById('articles').innerHTML;
-    const amount = document.getElementById('amount').value;
-    const totalPrice = document.getElementById('totalPrice').value;
-    const gettingStyle = document.getElementById('gettingStyle').value;
-    const customerEmail = prompt('Bitte geben Sie Ihre E-Mail-Adresse ein:');
-    
-    const orderMessage = `
+document.getElementById("sendOrderBtn").addEventListener("click", handleSendOrder);
+
+function handleSendOrder() {
+    const articles = getArticles();
+    const amount = getValue("amount");
+    const totalPrice = getValue("totalPrice");
+    const gettingStyle = getValue("gettingStyle");
+    const customerEmail = prompt("Bitte geben Sie Ihre E-Mail-Adresse ein:");
+    const orderMessage = generateOrderMessage(articles, amount, totalPrice, gettingStyle);
+
+    setValue("customerEmail", customerEmail);
+    setValue("orderMessage", orderMessage);
+
+    document.getElementById("orderForm").submit();
+
+    clearLocalStorage();
+    resetFormFields();
+}
+
+function generateOrderMessage(articles, amount, totalPrice, gettingStyle) {
+    let message = `
 Artikel:
 ${articles}
-Menge: ${amount}
-Gesamtpreis: ${totalPrice} €
-Abholungsart: ${gettingStyle}
-Abholung bestätigt: ${switchChecked}
-    `;
-    
-    document.getElementById('customerEmail').value = customerEmail;
-    document.getElementById('orderMessage').value = orderMessage;
-    
-    document.getElementById('orderForm').submit();
+Anzahl: ${amount}
+Gesamtpreis: ${totalPrice}€
+Abholart: ${gettingStyle}`;
 
-    // check keys in localStorage
-    if (localStorage.getItem('orderArticles') || localStorage.getItem('cartAmount') || localStorage.getItem('cartTotalPrice')) {
-        // localStorage leeren
-        localStorage.removeItem('orderArticles');
-        localStorage.removeItem('cartAmount');
-        localStorage.removeItem('cartTotalPrice');
-    }
+    return message;
+}
 
-    // check deleted keys from localstorage
-    if (!localStorage.getItem('orderArticles') && !localStorage.getItem('cartAmount') && !localStorage.getItem('cartTotalPrice')) {
-    } else {
-        alert('Es gab ein Problem beim Leeren des localStorage.');
-    }
+function getArticles() {
+    const articlesElements = document.querySelectorAll("#articles .shoppingArticle");
+    let articles = "";
+    articlesElements.forEach(article => {
+        const articleName = article.querySelector(".article-head h3").textContent;
+        const articleQuantity = article.querySelector(".articleQuantity").value;
+        articles += `${articleName} (Menge: ${articleQuantity})\n`;
+    });
+    return articles;
+}
 
-    // empty basket in DOM
-    document.getElementById('articles').innerHTML = '';
-    document.getElementById('amount').value = '0';
-    document.getElementById('totalPrice').value = '0';
-});
+function getValue(id) {
+    return document.getElementById(id).value;
+}
 
-// Sidebar functions
-function toggleSidebar() {
-    const sidebar = document.querySelector(".sidebar");
-    sidebar.classList.toggle("show");
-  }
-  
-  function toggleShoppingCart() {
-    const shoppingCart = document.querySelector("#shopping-cart");
-    shoppingCart.classList.toggle("show");
-  }
-  
-  // Dishbox functions
-  function toggleDishBox(dishBoxId, arrowId) {
-    const dishBox = document.querySelector(`#${dishBoxId}`);
-    dishBox.classList.toggle("show");
-  
-    const elementToRotate = document.querySelector(`#${arrowId}`);
-    elementToRotate.classList.toggle("rotate-180deg");
-  }
+function setValue(id, value) {
+    document.getElementById(id).value = value;
+}
 
-  
+function clearLocalStorage() {
+    localStorage.removeItem("orderArticles"); // oder den spezifischen Schlüssel, der verwendet wird
+}
+
+function resetFormFields() {
+    document.getElementById("articles").innerHTML = "";
+    document.getElementById("amount").value = "0";
+    document.getElementById("totalPrice").value = "0";
+    alert("Die Bestellung wurde erfolgreich aufgegeben.");
+}
+
+
+function toggleShoppingCart() {
+  const shoppingCart = document.querySelector("#shopping-cart");
+  shoppingCart.classList.toggle("show");
+}
+
+// Dishbox functions
+function toggleDishBox(dishBoxId, arrowId) {
+  const dishBox = document.querySelector(`#${dishBoxId}`);
+  dishBox.classList.toggle("show");
+
+  const elementToRotate = document.querySelector(`#${arrowId}`);
+  elementToRotate.classList.toggle("rotate-180deg");
+}
+
 // input Btns
 function higherValue(articleName) {
-    const storedArticles =
-      JSON.parse(localStorage.getItem("orderArticles")) || [];
-    const existingArticleIndex = storedArticles.findIndex(
-      (article) => article.name === articleName
-    );
-  
-    if (existingArticleIndex !== -1) {
-      storedArticles[existingArticleIndex].quantity += 1;
-      localStorage.setItem("orderArticles", JSON.stringify(storedArticles));
-  
-      // actual input in DOM
-      const quantityInput = document.getElementById(
-        `articleQuantity-${storedArticles[existingArticleIndex].id}`
-      );
-      if (quantityInput) {
-        quantityInput.value = storedArticles[existingArticleIndex].quantity;
-      }
-      calculateTotalArticles();
-      calculateTotalPrice();
-    }
-  }
-  
-  function lowerValue(articleName) {
-    const storedArticles =
-      JSON.parse(localStorage.getItem("orderArticles")) || [];
-    const existingArticleIndex = storedArticles.findIndex(
-      (article) => article.name === articleName
-    );
-  
-    if (existingArticleIndex !== -1) {
-      if (storedArticles[existingArticleIndex].quantity > 1) {
-        storedArticles[existingArticleIndex].quantity -= 1;
-        localStorage.setItem("orderArticles", JSON.stringify(storedArticles));
-  
-        // actual input in DOM
-        const quantityInput = document.getElementById(
-          `articleQuantity-${storedArticles[existingArticleIndex].id}`
-        );
-        if (quantityInput) {
-          quantityInput.value = storedArticles[existingArticleIndex].quantity;
-        }
-        calculateTotalArticles();
-        calculateTotalPrice();
-      }
-    }
-  }
+  const storedArticles = JSON.parse(localStorage.getItem("orderArticles")) || [];
+  const article = storedArticles.find(article => article.name === articleName);
 
+  if (article) {
+    article.quantity += 1;
+    localStorage.setItem("orderArticles", JSON.stringify(storedArticles));
 
-  // delivery button
+    const quantityInput = document.getElementById(`articleQuantity-${article.id}`);
+    if (quantityInput) {
+      quantityInput.value = article.quantity;
+    }
+    calculateTotalArticles();
+    calculateTotalPrice();
+  }
+}
+
+function lowerValue(articleName) {
+  const storedArticles = JSON.parse(localStorage.getItem("orderArticles")) || [];
+  const article = storedArticles.find(article => article.name === articleName);
+
+  if (article && article.quantity > 1) {
+    article.quantity -= 1;
+    localStorage.setItem("orderArticles", JSON.stringify(storedArticles));
+
+    const quantityInput = document.getElementById(`articleQuantity-${article.id}`);
+    if (quantityInput) {
+      quantityInput.value = article.quantity;
+    }
+    calculateTotalArticles();
+    calculateTotalPrice();
+  }
+}
+
 function toggleInputValue() {
-    let checkbox = document.getElementById("switch");
-    let input = document.getElementById("gettingStyle");
-    
-    if (checkbox.checked) {
-        input.value = "Lieferung";
-    } else {
-        input.value = "Abholung";
+  let checkbox = document.getElementById("switch");
+  let input = document.getElementById("gettingStyle");
+  let priceElements = document.getElementsByClassName("deliveryPrice");
+
+  if (checkbox.checked) {
+    input.value = "Lieferung";
+    for (let price of priceElements) {
+      price.classList.toggle("show");
+    }
+  } else {
+    input.value = "Abholung";
+    for (let price of priceElements) {
+      price.classList.remove("show");
     }
   }
-  window.onload = function() {
-    let checkbox = document.getElementById("switch");
-    checkbox.addEventListener("change", toggleInputValue);
-  };
+}
+
+window.onload = function () {
+  let checkbox = document.getElementById("switch");
+  checkbox.addEventListener("change", toggleInputValue);
+};
+
+// updatePrice by delivery
+document.addEventListener('DOMContentLoaded', () => {
+  const checkbox = document.getElementById('switch');
+  const input = document.getElementById('totalPrice');
+
+  checkbox.addEventListener('change', () => {
+      input.value = (parseFloat(input.value) + (checkbox.checked ? 4 : 0)).toFixed(2);
+  });
+});

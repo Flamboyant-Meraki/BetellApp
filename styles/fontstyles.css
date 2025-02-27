@@ -26,4 +26,6 @@ h2,h3{
 .categoryHeadline{
   margin-left: 12px;
   margin-top: 14px;
+  position: absolute;
+  left: 0;
 }

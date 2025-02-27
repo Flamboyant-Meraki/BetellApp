@@ -23,40 +23,16 @@
   <body>
     <header>
       <div class="headShow">
-        <img class="header_logo" src="./Material/Logo/Logo.png" alt="" />
+        <a href="#splitContent"><img class="header_logo" src="./Material/Logo/Logo.png" alt="Logo" /></a>
         <div class="evaluation">
-          <img class="stars" src="./assets/icons/stars.png" alt="Star">
+          <img class="stars" src="./assets/icons/stars.png" alt="Star" />
           <p>4/5</p>
         </div>
       </div>
-      <button onclick="toggleSidebar()" class="menu-button">
-        <img class="menu-icon" src="./assets/icons/menu.png" alt="" />
+      <button onclick="toggleShoppingCart()" class="menu-button">
+        <img class="menu-icon" src="./assets/icons/shopping_bag.png" alt="" />
       </button>
     </header>
-
-    <nav>
-      <ul class="sidebar">
-        <li>
-          <a href="#contentbox"
-            ><img
-              class="menu-icon"
-              src="./assets/icons/home.png"
-              alt="House"
-              href="#contentbox"
-            />Home</a
-          >
-        </li>
-        <li>
-          <a onclick="toggleShoppingCart()"
-            ><img
-              class="menu-icon"
-              src="./assets/icons/shopping_bag.png"
-              alt="Shoppingbag"
-            />Warenkorb</a
-          >
-        </li>
-      </ul>
-    </nav>
 
     <div id="splitContent">
       <section id="contentbox">
@@ -78,7 +54,7 @@
               src="./assets/icons/arrow_right.png"
               alt="arrow_right"
             />
-            <a href="#maindish" onclick="scrollToElement(event)">Brote</a>
+            <a href="#maindish">Brote</a>
             <a href="#sidedish">Brötchen</a>
             <a href="#sandwiches">Belegtes</a>
             <a href="#drinks">Getränke</a>
@@ -86,68 +62,72 @@
         </div>
 
         <section id="maindish">
-          <h3 class="categoryHeadline" id="mainDishes">Brote:</h3>
+          <div class="dishHead">
+            <h3 class="categoryHeadline" id="mainDishes">Brote:</h3>
+            <div
+              id="arrowBtn"
+              data-target="dishBox1"
+              onclick="toggleDishBox('dishBox1', 'arrow1')"
+            >
+              <img
+                class="elementToRotate"
+                id="arrow1"
+                src="./assets/icons/slideopen.png"
+                alt=""
+              />
+            </div>
+          </div>
           <div class="dishBox" id="dishBox1">
             <!-- maindish content -->
-          </div>
-          <div
-            id="arrowBtn"
-            data-target="dishBox1"
-            onclick="toggleDishBox('dishBox1', 'arrow1')"
-          >
-            <img
-              class="elementToRotate"
-              id="arrow1"
-              src="./assets/icons/slideopen.png"
-              alt=""
-            />
           </div>
         </section>
 
         <section id="sidedish">
-          <h3 class="categoryHeadline" id="sideDishes">Brötchen:</h3>
+          <div class="dishHead">
+            <h3 class="categoryHeadline" id="sideDishes">Brötchen:</h3>
+            <div
+              id="arrowBtn"
+              data-target="dishBox2"
+              onclick="toggleDishBox('dishBox2', 'arrow2')"
+            >
+              <img
+                class="elementToRotate"
+                id="arrow2"
+                src="./assets/icons/slideopen.png"
+                alt=""
+              />
+            </div>
+          </div>
           <div class="dishBox" id="dishBox2">
             <!-- sidedish content -->
-          </div>
-          <div
-            id="arrowBtn"
-            data-target="dishBox2"
-            onclick="toggleDishBox('dishBox2', 'arrow2')"
-          >
-            <img
-              class="elementToRotate"
-              id="arrow2"
-              src="./assets/icons/slideopen.png"
-              alt=""
-            />
           </div>
         </section>
 
         <section id="sandwiches">
-          <h3 class="categoryHeadline" id="sandwich">Belegtes:</h3>
+          <div class="dishHead">
+            <h3 class="categoryHeadline" id="sandwich">Belegtes:</h3>
+            <div
+              id="arrowBtn"
+              data-target="dishBox3"
+              onclick="toggleDishBox('dishBox3', 'arrow3')"
+            >
+              <img
+                class="elementToRotate"
+                id="arrow3"
+                src="./assets/icons/slideopen.png"
+                alt=""
+              />
+            </div>
+          </div>
           <div class="dishBox" id="dishBox3">
             <!-- sandwich content -->
-          </div>
-          <div
-            id="arrowBtn"
-            data-target="dishBox3"
-            onclick="toggleDishBox('dishBox3', 'arrow3')"
-          >
-            <img
-              class="elementToRotate"
-              id="arrow3"
-              src="./assets/icons/slideopen.png"
-              alt=""
-            />
           </div>
         </section>
 
         <section id="drinks">
-          <h3 class="categoryHeadline" id="toDrink">Getränke:</h3>
-          <div class="dishBox" id="dishBox4">
-            <!-- drink content -->
-          </div>
-          <div
+          <div class="dishHead">
+            <h3 class="categoryHeadline" id="toDrink">Getränke:</h3>
+            <div
             id="arrowBtn"
             data-target="dishBox4"
             onclick="toggleDishBox('dishBox4', 'arrow4')"
@@ -158,6 +138,10 @@
               src="./assets/icons/slideopen.png"
               alt=""
             />
+          </div>
+          </div>
+          <div class="dishBox" id="dishBox4">
+            <!-- drink content -->
           </div>
         </section>
 
@@ -191,7 +175,7 @@
           </button>
           <span>Warenkorb</span>
           <div class="switchBox">
-            <input type="checkbox" id="switch" />
+            <input type="checkbox" id="switch"/>
             <input type="text" value="Abholung" id="gettingStyle" />
           </div>
           <hr />
@@ -200,6 +184,7 @@
           </div>
           <div id="total">
             <p><input id="amount" type="text" value="0" />Artikel</p>
+            <p class="deliveryPrice"><input type="text" value="+ 4.00">€ Liefergebür</p>
             <p><input id="totalPrice" type="text" value="0" />€</p>
             <button id="sendOrderBtn">Jetzt bestellen</button>
           </div>
@@ -212,6 +197,6 @@
     <script src="./scripts/template.js"></script>
     <script src="./scripts/shopping-cart.js"></script>
     <script src="./scripts/buttons.js"></script>
-    <script src="./scripts/backend.js"></script>
+    <script src="./scripts/db.js"></script>
   </body>
 </html>

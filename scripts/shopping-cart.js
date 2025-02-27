@@ -12,7 +12,6 @@ window.onload = displayStoredArticles();
 
 // delete article
 function deleteArticle(articleName) {
-  console.log(`Deleting article: ${articleName}`);
   const storedArticles =
     JSON.parse(localStorage.getItem("orderArticles")) || [];
   const updatedArticles = storedArticles.filter(
@@ -27,7 +26,6 @@ document.addEventListener("click", function (event) {
   const deleteButton = event.target.closest(".deleteBtn");
   if (deleteButton) {
     const articleName = deleteButton.getAttribute("data-name");
-    console.log(`Article name to delete: ${articleName}`);
     deleteArticle(articleName);
   }
   calculateTotalArticles();
@@ -45,7 +43,6 @@ function calculateTotalArticles() {
   }
   document.getElementById("amount").value = total;
 }
-// Aufruf der Funktion
 calculateTotalArticles();
 
 function calculateTotalPrice() {
@@ -61,16 +58,26 @@ function calculateTotalPrice() {
       totalPrice += price * quantity;
     }
   }
-
-  // Ergebnis in das totalPrice Eingabefeld setzen
-  document.getElementById("totalPrice").value = totalPrice.toFixed(2); // auf 2 Dezimalstellen runden
+  document.getElementById("totalPrice").value = totalPrice.toFixed(2);
 }
 
-// Beispielaufruf der Funktion beim Laden der Seite
 window.onload = function () {
   displayStoredArticles();
   calculateTotalArticles();
   calculateTotalPrice();
 };
 
+function addToOrder(articleId, articleName, articlesPrice) {
+  const storedArticles = JSON.parse(localStorage.getItem("orderArticles")) || [];
+  const article = storedArticles.find(article => article.name === articleName);
+
+  if (article) {
+    article.quantity += 1;
+  } else {
+    storedArticles.push({ id: articleId, name: articleName, price: articlesPrice, quantity: 1 });
+  }
+
+  localStorage.setItem("orderArticles", JSON.stringify(storedArticles));
+  displayStoredArticles();
+}
 
